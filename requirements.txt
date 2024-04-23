@@ -1,0 +1,8 @@
+pip~=20.3.4
+distro~=1.8.0
+cryptography~=37.0.2
+Pillow~=9.5.0
+setuptools~=65.5.1
+packaging~=23.0
+future~=0.18.3
+Django~=5.0.4
