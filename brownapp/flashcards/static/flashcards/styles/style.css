@@ -31,7 +31,7 @@ body {
     font-weight: 600;
 }
 
-.decks {
+#decks {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,6 +40,7 @@ body {
     width: 80%;
     padding: 1rem 0;
     gap: 1rem;
+    overflow-y: auto;
 }
 
 .sidebar-footer {
@@ -64,6 +65,12 @@ button.deck, #createDeck{
     cursor: pointer;
     font-family: 'Space Mono', monospace;
     font-size: 1.2rem;
+}
+
+#createDeck {
+    border: 2px dotted #d2dae2;
+    color: #d2dae2;
+    background: transparent;
 }
 
 #account {
