@@ -96,8 +96,6 @@ button.deck, #createDeck{
 
 .card {
     position: relative;
-    width: 400px;
-    height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,12 +103,12 @@ button.deck, #createDeck{
     background: #d2dae2;
     color: #1e272e;
     font-family: 'Space Mono', monospace;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 600;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    margin: 1rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
     cursor: pointer;
 }
 

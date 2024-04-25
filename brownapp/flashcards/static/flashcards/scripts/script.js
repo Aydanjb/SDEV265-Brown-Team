@@ -14,13 +14,6 @@ const cards = [
     }
 ]
 
-function addDeckButton() {
-    const deck = document.createElement('button');
-    deck.classList.add('deck');
-    deck.innerHTML = 'Deck';
-    createDeckBtn.insertAdjacentElement('beforebegin', deck);
-}
-
 function displayCards() {
     cards.forEach(element => {
         const card = document.createElement('div');
@@ -37,8 +30,49 @@ function displayCards() {
     });
 }
 
+function makeActive(ele) {
+    deck.forEach(element => {
+        element.classList.remove('active');
+    });
+    ele.classList.add('active');
+}
+
 deck.forEach(element => {
-    element.addEventListener('click', displayCards);
+    element.addEventListener('click', () => {
+        if (element.classList.contains('active')) {
+            return;
+        }
+        else {
+            clearCards();
+            displayCards();
+            makeActive(element);
+        }
+    });
 });
+
+function clearCards() {
+    const card = document.querySelectorAll('.card');
+    card.forEach(element => {
+        element.remove();
+    });
+}
+
+function addDeckButton() {
+    const deck = document.createElement('button');
+    deck.classList.add('deck');
+    deck.addEventListener('click', () => {
+        if (deck.classList.contains('active')) {
+            return;
+        }
+        else {
+            clearCards();
+            displayCards();
+            makeActive(deck);
+        }
+    });
+    deck.innerHTML = 'Deck';
+    createDeckBtn.insertAdjacentElement('beforebegin', deck);
+}
+
 createDeckBtn.addEventListener('click', addDeckButton);
 
