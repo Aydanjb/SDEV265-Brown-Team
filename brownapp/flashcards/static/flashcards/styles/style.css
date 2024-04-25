@@ -3,8 +3,14 @@ body {
     background-color: #485460;
 }
 
+#content {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
 .sidebar {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     height: 100%;
@@ -47,6 +53,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    bottom: 0;
     height: 64px;
     width: 100%;
     color: #d2dae2;
@@ -85,4 +92,36 @@ button.deck, #createDeck{
     font-family: 'Space Mono', monospace;
     font-size: 1.2rem;
     border-radius: 0%;
+}
+
+.card {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #d2dae2;
+    color: #1e272e;
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
 }

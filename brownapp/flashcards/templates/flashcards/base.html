@@ -11,23 +11,25 @@
 </head>
     
 <body>
-    <nav class="sidebar">
-        <div class="sidebar-header">
-            <h1>Flashcards</h1>
-        </div>
-        <div id="decks">
-            <h2>Decks</h3>
-            <button type="button" class="deck">A Deck</button>
-            <button type="button" id="createDeck">Create New Deck</button>
-        </div>
-        <div class="sidebar-footer">
-            <button type="button" id="account">My account</button>
-        </div>
+    <div id="content">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>Flashcards</h1>
+            </div>
+            <div id="decks">
+                <h2>Decks</h3>
+                <button type="button" class="deck">A Deck</button>
+                <button type="button" id="createDeck">Create New Deck</button>
+            </div>
+            <div class="sidebar-footer">
+                <button type="button" id="account">My account</button>
+            </div>
+        </nav>
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
     </div>
-    <main>
-        {% block content %}
-        {% endblock content %}
-    </main>
     <script src="{% static 'flashcards/scripts/script.js' %}"></script>
 </body>
 
