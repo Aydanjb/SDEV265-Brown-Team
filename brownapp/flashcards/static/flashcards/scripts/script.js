@@ -1,6 +1,6 @@
 const createDeckBtn = document.getElementById('createDeck');
 const decks = document.getElementById('decks');
-const deck = document.querySelectorAll('.deck');
+const allDecks = document.querySelectorAll('.deck');
 const main = document.querySelector('main');
 
 const cards = [
@@ -30,19 +30,24 @@ function displayCards() {
     });
 }
 
-function makeActive(ele) {
-    deck.forEach(element => {
+function removeActive() {
+    const allDecks = document.querySelectorAll('.deck');
+    allDecks.forEach(element => {
         element.classList.remove('active');
     });
+}
+
+function makeActive(ele) {
     ele.classList.add('active');
 }
 
-deck.forEach(element => {
+allDecks.forEach(element => {
     element.addEventListener('click', () => {
         if (element.classList.contains('active')) {
             return;
         }
         else {
+            removeActive();
             clearCards();
             displayCards();
             makeActive(element);
@@ -65,6 +70,7 @@ function addDeckButton() {
             return;
         }
         else {
+            removeActive(); 
             clearCards();
             displayCards();
             makeActive(deck);
