@@ -11,6 +11,28 @@
 </head>
     
 <body>
+    <div id="deckModal" class="modal">
+        <div class="modal-content">
+            <form>
+                <label for="deck"><b>Deck Name:</b></label>
+                <input type="text" id="deck-input" name="deck" required>
+                <button type="button" id="saveDeck" class="saveBtn">Save</button>
+            </form>
+        </div>
+    </div>
+    <div id="cardModal" class="modal">
+        <div class="modal-content">
+            <form>
+                <label for="front"><b>Front:</b></label>
+                <input type="text" id="front-input" name="front" required>
+
+                <label for="back"><b>Back:</b></label>
+                <input type="text" id="back-input" name="back" required>
+
+                <button type="button" id="saveCard" class="saveBtn">Save</button>
+            </form>
+        </div>
+    </div>
     <div id="content">
         <nav class="sidebar">
             <div class="sidebar-header">
@@ -34,8 +56,10 @@
         </nav>
         <main>
             {% block content %}
+            
             {% endblock content %}
         </main>
+        
     </div>
     <script src="{% static 'flashcards/scripts/script.js' %}"></script>
 </body>

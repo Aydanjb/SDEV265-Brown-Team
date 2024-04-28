@@ -80,6 +80,10 @@ button.deck, #createDeck{
     background: transparent;
 }
 
+#createDeck:hover {
+    opacity: 0.8;
+}
+
 #account {
     position: absolute;
     bottom: 0;
@@ -146,3 +150,83 @@ main {
 .flipped {
     transform: rotateY(180deg);
 }
+
+.addCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #485460;
+    color: #d2dae2;
+    font-family: 'Space Mono', monospace;
+    height: 150px;
+    width: 300px;
+    font-size: 1.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    border: #1e272e dashed 2px;
+    border-radius: 10px;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    transition-delay: 0s;
+    transition: transform 0.5s ease-out;
+    transform-style: preserve-3d;
+}
+
+.addCard:hover {
+    opacity: 0.8;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    padding: 3rem;
+}
+
+.modal-content {
+    position: relative;
+    background: #485460;
+    color: #d2dae2;
+    font-family: 'Space Mono', monospace;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 15% auto;
+}
+
+label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #d2dae2;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #1e272e;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.saveBtn {
+    background-color: #1e272e;
+    color: #d2dae2;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
