@@ -51,6 +51,7 @@ allDecks.forEach(element => {
             clearCards();
             displayCards();
             makeActive(element);
+            addFlipping();
         }
     });
 });
@@ -74,6 +75,7 @@ function addDeckButton() {
             clearCards();
             displayCards();
             makeActive(deck);
+            addFlipping();
         }
     });
     deck.innerHTML = 'Deck';
@@ -82,3 +84,11 @@ function addDeckButton() {
 
 createDeckBtn.addEventListener('click', addDeckButton);
 
+function addFlipping() {
+    const card = document.querySelectorAll('.card');
+    card.forEach(element => {
+        element.addEventListener('click', () => {
+            element.classList.toggle('flipped');
+        });
+    });
+}

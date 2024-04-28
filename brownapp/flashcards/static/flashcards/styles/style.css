@@ -98,11 +98,13 @@ button.deck, #createDeck{
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     background: #d2dae2;
     color: #1e272e;
     font-family: 'Space Mono', monospace;
+    height: 150px;
+    width: 300px;
     font-size: 1rem;
     font-weight: 600;
     border-radius: 10px;
@@ -110,6 +112,9 @@ button.deck, #createDeck{
     padding: 0.5rem;
     margin: 0.5rem;
     cursor: pointer;
+    transition-delay: 0s;
+    transition: transform 0.5s ease-out;
+    transform-style: preserve-3d;
 }
 
 main {
@@ -122,4 +127,22 @@ main {
     height: 100%;
     width: 100%;
     overflow-y: auto;
+}
+
+.front, .back {
+    position: absolute;
+    backface-visibility: hidden;
+    height: 50%;
+}
+
+.front {
+    transform: rotateY(0deg);
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.flipped {
+    transform: rotateY(180deg);
 }
