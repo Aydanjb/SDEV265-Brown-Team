@@ -8,9 +8,45 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'flashcards/styles/style.css' %}">
+    <script src="https://kit.fontawesome.com/03a7d2955d.js" crossorigin="anonymous"></script>
 </head>
     
 <body>
+    <div id="cardSlides">
+        <div id="card-container">
+            <span id="left-arrow">
+                <i class="fa-solid fa-arrow-left"></i>
+            </span>
+            <div class="cardSlide">
+                
+            </div>
+            <span id="right-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+        </div>
+    </div>
+    <div id="deckModal" class="modal">
+        <div class="modal-content">
+            <form>
+                <label for="deck"><b>Deck Name:</b></label>
+                <input type="text" id="deck-input" name="deck" required>
+                <button type="button" id="saveDeck" class="saveBtn">Save</button>
+            </form>
+        </div>
+    </div>
+    <div id="cardModal" class="modal">
+        <div class="modal-content">
+            <form>
+                <label for="front"><b>Front:</b></label>
+                <input type="text" id="front-input" name="front" required>
+
+                <label for="back"><b>Back:</b></label>
+                <input type="text" id="back-input" name="back" required>
+
+                <button type="button" id="saveCard" class="saveBtn">Save</button>
+            </form>
+        </div>
+    </div>
     <div id="content">
         <nav class="sidebar">
             <div class="sidebar-header">
@@ -19,9 +55,11 @@
             <div id="timer">
                 <h2>Pomodoro Timer</h2>
                 <p>0:00</p>
-                <button type="button" id="start">Start</button>
-                <button type="button" id="stop">Stop</button>
-                <button type="button" id="reset">Reset</button>
+                <div id="timer-buttons">  
+                    <button type="button" id="start">Start</button>
+                    <button type="button" id="stop">Stop</button>
+                    <button type="button" id="reset">Reset</button>
+                </div>
             </div>
             <div id="decks">
                 <h2>Decks</h3>
@@ -34,8 +72,10 @@
         </nav>
         <main>
             {% block content %}
+            
             {% endblock content %}
         </main>
+        
     </div>
     <script src="{% static 'flashcards/scripts/script.js' %}"></script>
     <script src="{% static 'flashcards/scripts/pomodoro.js' %}"></script>
