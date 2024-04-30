@@ -44,22 +44,6 @@ function makeActive(ele) {
     ele.classList.add('active');
 }
 
-allDecks.forEach(element => {
-    element.addEventListener('click', () => {
-        if (element.classList.contains('active')) {
-            return;
-        }
-        else {
-            removeActive();
-            clearCards();
-            createAddCardButton();
-            displayCards();
-            makeActive(element);
-            addFlipping();
-        }
-    });
-});
-
 function clearCards() {
     const card = document.querySelectorAll('.card');
     card.forEach(element => {
@@ -78,8 +62,6 @@ function closeDeckModal() {
 function addDeckButton() {
     openDeckModal();
 }
-
-createDeckBtn.addEventListener('click', addDeckButton);
 
 function addFlipping() {
     const card = document.querySelectorAll('.card');
@@ -105,6 +87,24 @@ function openCardModal() {
 function closeCardModal() {
     cardModal.style.display = 'none';
 }
+
+createDeckBtn.addEventListener('click', addDeckButton);
+
+allDecks.forEach(element => {
+    element.addEventListener('click', () => {
+        if (element.classList.contains('active')) {
+            return;
+        }
+        else {
+            removeActive();
+            clearCards();
+            createAddCardButton();
+            displayCards();
+            makeActive(element);
+            addFlipping();
+        }
+    });
+});
 
 saveCard.addEventListener('click', () => {
     const front = document.getElementById('front-input').value;
