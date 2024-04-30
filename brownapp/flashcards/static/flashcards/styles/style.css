@@ -33,8 +33,13 @@ body {
     height: 64px;
     width: 100%;
     color: #d2dae2;
-    font-size: 1.5rem;
+    font-size: xx-large;
     font-weight: 600;
+}
+
+.sidebar-header a {
+    text-decoration: none;
+    color: #d2dae2;
 }
 
 #decks {
@@ -61,17 +66,21 @@ body {
     font-weight: 600;
 }
 
-button.deck, #createDeck{
+a.deck, button.deck, #createDeck{
     position: relative;
     height: 54px;
     min-width: 3rem;
-    width: 100%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     font-family: 'Space Mono', monospace;
     font-size: 1.2rem;
+    padding: 1px 6px;
+    color: #1e272e;
+    background-color: #d2dae2;
+    text-decoration: none;
 }
 
 #createDeck {

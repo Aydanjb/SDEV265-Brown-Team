@@ -27,30 +27,19 @@
     </div>
     <div id="deckModal" class="modal">
         <div class="modal-content">
-            <form>
-                <label for="deck"><b>Deck Name:</b></label>
-                <input type="text" id="deck-input" name="deck" required>
-                <button type="button" id="saveDeck" class="saveBtn">Save</button>
+            <form action="create_deck/" method="post">
+                {% csrf_token %}
+                {{ f_deck.as_p }}
+                <button type="submit" id="saveDeck" class="saveBtn">Save</button>
             </form>
         </div>
     </div>
-    <div id="cardModal" class="modal">
-        <div class="modal-content">
-            <form>
-                <label for="front"><b>Front:</b></label>
-                <input type="text" id="front-input" name="front" required>
-
-                <label for="back"><b>Back:</b></label>
-                <input type="text" id="back-input" name="back" required>
-
-                <button type="button" id="saveCard" class="saveBtn">Save</button>
-            </form>
-        </div>
-    </div>
+    {% block cardModal %}
+    {% endblock cardModal %}
     <div id="content">
         <nav class="sidebar">
             <div class="sidebar-header">
-                <h1>Flashcards</h1>
+                <a href="/">Flashcards</a>
             </div>
             <div id="timer">
                 <h2>Pomodoro Timer</h2>
@@ -63,7 +52,9 @@
             </div>
             <div id="decks">
                 <h2>Decks</h3>
-                <button type="button" class="deck">A Deck</button>
+                {% for deck in decks %}
+                    <a href="/deck/{{ deck.id }}" class="button deck">{{ deck.name }}</a>
+                {% endfor %}
                 <button type="button" id="createDeck">Create New Deck</button>
             </div>
             <div class="sidebar-footer">
@@ -72,13 +63,12 @@
         </nav>
         <main>
             {% block content %}
-            
             {% endblock content %}
         </main>
         
     </div>
     <script src="{% static 'flashcards/scripts/script.js' %}"></script>
-    <script src="{% static 'flashcards/scripts/pomodoro.js' %}"></script>
+    <!--<script src="{% static 'flashcards/scripts/pomodoro.js' %}"></script>-->
 </body>
 
 </html>

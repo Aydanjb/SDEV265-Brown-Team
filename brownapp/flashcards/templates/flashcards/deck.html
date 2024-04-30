@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block cardModal %}
+    <div id="cardModal" class="modal">
+        <div class="modal-content">
+            <form action="../../create_card/{{ deck.id }}/" method="post">
+                {% csrf_token %}
+                {{ f_card.as_p }}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="submit" id="saveCard" class="saveBtn">Save</button>
+            </form>
+        </div>
+    </div>
+{% endblock cardModal %}
+{% block content %}
+    <div class="addCard">
+        Add Card
+    </div>
+    {% for card in cards %}
+        <div class="card">
+            <div class="front">
+                <p>{{ card.front }}</p>
+            </div>
+            <div class="back">
+                <p>{{ card.back }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content%}
