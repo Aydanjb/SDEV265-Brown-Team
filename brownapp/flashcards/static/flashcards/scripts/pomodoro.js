@@ -19,20 +19,6 @@ function updateTimerDisplay() {
     timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// Function to switch timer mode
-function switchMode(newMode) {
-    mode = newMode;
-    remainingTime = {
-        total: eval(`${newMode}Duration`),
-        minutes: eval(`${newMode}Duration` / 60),
-        seconds: 0
-    };
-
-    // Update active button
-    document.querySelectorAll('button[data-mode]').forEach(e => e.classList.remove('active'));
-    document.querySelector(`[data-mode="${newMode}"]`).classList.add('active');
-}
-
 // Event listeners for buttons
 startButton.addEventListener('click', () => {
     clearInterval(timer); // Clear any existing timers
