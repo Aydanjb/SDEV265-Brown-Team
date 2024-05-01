@@ -1,5 +1,23 @@
 {% extends "base.html" %}
 
+{% block cardSlides %}
+    <div id="cardSlides">
+        <div id="card-container">
+            <span id="left-arrow">
+                <i class="fa-solid fa-arrow-left"></i>
+            </span>
+            <div id="cardSlide">
+            </div>
+            <span id="right-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+        </div>
+        <div id="cardButtons">
+            <a href="" class="deleteCard">X</a>
+            <button type="button" class="editCard">Edit</button>
+        </div>
+    </div>
+{% endblock cardSlides %}
 {% block cardModal %}
     <div id="cardModal" class="modal">
         <div class="modal-content">
@@ -17,11 +35,13 @@
         Add Card
     </div>
     {% for card in cards %}
-        <div class="card">
-            <div class="front">
-                <p>{{ card.front }}</p>
-            </div>
-            <div class="back">
+        <div class="card" data-id="{{ card.id }}">
+            <!--
+            -->
+             <div class="front">
+                 <p>{{ card.front }}</p>
+             </div>
+             <div class="back">
                 <p>{{ card.back }}</p>
             </div>
         </div>

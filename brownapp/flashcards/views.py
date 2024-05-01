@@ -44,3 +44,9 @@ def create_card(response, deck_id):
             new_card = Card(front=front, back=back, deck=deck)
             new_card.save()
         return redirect("/deck/" + str(deck_id) + "/")
+    
+def delete_card(response, deck_id, card_id):
+    card = Card.objects.get(id=card_id)
+    deck_id = card.deck.id
+    card.delete()
+    return redirect("/deck/" + str(deck_id) + "/")

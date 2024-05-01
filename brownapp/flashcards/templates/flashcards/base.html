@@ -12,19 +12,8 @@
 </head>
     
 <body>
-    <div id="cardSlides">
-        <div id="card-container">
-            <span id="left-arrow">
-                <i class="fa-solid fa-arrow-left"></i>
-            </span>
-            <div class="cardSlide">
-                
-            </div>
-            <span id="right-arrow">
-                <i class="fa-solid fa-arrow-right"></i>
-            </span>
-        </div>
-    </div>
+    {% block cardSlides %}
+    {% endblock cardSlides %}
     <div id="deckModal" class="modal">
         <div class="modal-content">
             <form action="create_deck/" method="post">
@@ -65,7 +54,6 @@
             {% block content %}
             {% endblock content %}
         </main>
-        
     </div>
     <script src="{% static 'flashcards/scripts/script.js' %}"></script>
     <!--<script src="{% static 'flashcards/scripts/pomodoro.js' %}"></script>-->
