@@ -34,6 +34,19 @@ def create_deck(response, deck_id=None):
             return redirect("/deck/" + str(deck_id) + "/")
         return redirect("/")
     
+def delete_deck(response, deck_id, id):
+    deck = Deck.objects.get(id=deck_id)
+    deck.delete()
+    return redirect("/")
+
+def edit_deck(response, deck_id, id):
+    if response.method == "POST":
+        deck = Deck.objects.get(id=deck_id)
+        f_deck = deck_form(response.POST, instance=deck)
+        if f_deck.is_valid():
+            f_deck.save()
+        return redirect("/")
+        
 def create_card(response, deck_id):
     if response.method == "POST":
         f_card = card_form(response.POST)
@@ -50,3 +63,11 @@ def delete_card(response, deck_id, card_id):
     deck_id = card.deck.id
     card.delete()
     return redirect("/deck/" + str(deck_id) + "/")
+
+def edit_card(response, deck_id, card_id):
+    if response.method == "POST":
+        card = Card.objects.get(id=card_id)
+        f_card = card_form(response.POST, instance=card)
+        if f_card.is_valid():
+            f_card.save()
+        return redirect("/deck/" + str(deck_id) + "/")

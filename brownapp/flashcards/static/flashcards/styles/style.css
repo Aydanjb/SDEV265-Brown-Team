@@ -54,6 +54,20 @@ body {
     overflow-y: auto;
 }
 
+.deck-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.deck-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .sidebar-footer {
     display: flex;
     align-items: center;
@@ -335,10 +349,9 @@ i:hover {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
 }
 
-.editCard {
+.editCard, .editDeck {
     display: inline-block;
     padding: 10px 20px;
     color: #FFFFFF;
@@ -352,7 +365,15 @@ i:hover {
     border-radius: 5px;
 }
 
-.deleteCard {
+.editDeck {
+    box-sizing: border-box;
+    width: 35px;
+    padding: 0.25rem;
+    border-radius: 0;
+    margin: 0;
+}
+
+.deleteCard, .deleteDeck {
     display: inline-block;
     padding: 10px 10px;
     color: #d2dae2;
@@ -364,4 +385,13 @@ i:hover {
     transition: all 0.5s;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.deleteDeck {
+    
+    box-sizing: border-box;
+    width: 35px;
+    padding: 0.25rem;
+    border-radius: 0;
+    margin: 0;
 }

@@ -23,8 +23,19 @@
             </form>
         </div>
     </div>
+    <div id="editDeckModal" class="modal">
+        <div class="modal-content">
+            <form action="edit_deck/" method="post">
+                {% csrf_token %}
+                {{ f_deck.as_p }}
+                <button type="submit" id="saveEditDeck" class="saveBtn">Save</button>
+            </form>
+        </div>
+    </div>
     {% block cardModal %}
     {% endblock cardModal %}
+    {% block editModal %}
+    {% endblock editModal %}
     <div id="content">
         <nav class="sidebar">
             <div class="sidebar-header">
@@ -41,9 +52,15 @@
             </div>
             <div id="decks">
                 <h2>Decks</h3>
-                {% for deck in decks %}
-                    <a href="/deck/{{ deck.id }}" class="button deck">{{ deck.name }}</a>
-                {% endfor %}
+                    {% for deck in decks %}
+                    <div class="deck-container">
+                        <a href="/deck/{{ deck.id }}" class="button deck">{{ deck.name }}</a>
+                        <div class="deck-buttons">
+                            <a href="delete_deck/{{ deck.id }}" class="deleteDeck">X</a>
+                            <button type="button" class="editDeck">Edit</button>
+                        </div>
+                    </div>
+                    {% endfor %}
                 <button type="button" id="createDeck">Create New Deck</button>
             </div>
             <div class="sidebar-footer">
@@ -55,7 +72,10 @@
             {% endblock content %}
         </main>
     </div>
-    <script src="{% static 'flashcards/scripts/script.js' %}"></script>
+
+    {% block scripts %}
+        <script src="{% static 'flashcards/scripts/script.js' %}"></script>
+    {% endblock scripts %}
     <!--<script src="{% static 'flashcards/scripts/pomodoro.js' %}"></script>-->
 </body>
 
