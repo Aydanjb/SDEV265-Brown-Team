@@ -1,0 +1,20 @@
+{% extends "flashcards/base.html" %}
+{% load static %}
+{% block content %}
+<form method="POST" action="">
+    {% csrf_token %}
+    <h3>REGISTER</h3>
+    <h5>{{form.username.label}}</h5>
+    {{form.username}}
+    <h5>{{form.email.label}}</h5>
+    {{form.email}}
+    <h5>{{form.password1.label}}</h5>
+    {{form.password1}}
+    <h5>{{form.password2.label}}</h5>
+    {{form.password2}}<br>
+    Your password must be at least 8 characters, must not be entirely numbers, may not match your username, and not be common words.
+    <br>
+    <input type="submit" value="Create User">
+</form>
+
+{% endblock %}

@@ -1,20 +1,21 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
     <title>Flashcards</title>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'flashcards/styles/style.css' %}">
+    <script src="https://kit.fontawesome.com/03a7d2955d.js" crossorigin="anonymous"></script>
 </head>
-
+    
 <body>
-    <header>
-        <h1>Flashcards App</h1>
-    </header>
-    <main>
-        {% block content %}
-            <h2>Welcome to your Flashcards app!</h2>
-        {% endblock content %}
-    </main>
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
 </body>
 
 </html>
