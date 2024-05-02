@@ -34,7 +34,7 @@ def create_deck(response, deck_id=None):
             return redirect("/deck/" + str(deck_id) + "/")
         return redirect("/")
     
-def delete_deck(response, deck_id, id):
+def delete_deck(response, deck_id, id=None):
     deck = Deck.objects.get(id=deck_id)
     deck.delete()
     return redirect("/")
