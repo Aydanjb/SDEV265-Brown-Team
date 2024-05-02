@@ -25,7 +25,7 @@
     </div>
     <div id="editDeckModal" class="modal">
         <div class="modal-content">
-            <form action="edit_deck/" method="post">
+            <form action="edit_deck/{{ deck.id }}" method="post" id="editDeckForm">
                 {% csrf_token %}
                 {{ f_deck.as_p }}
                 <button type="submit" id="saveEditDeck" class="saveBtn">Save</button>
@@ -57,7 +57,7 @@
                         <a href="/deck/{{ deck.id }}" class="button deck">{{ deck.name }}</a>
                         <div class="deck-buttons">
                             <a href="delete_deck/{{ deck.id }}" class="deleteDeck">X</a>
-                            <button type="button" class="editDeck">Edit</button>
+                            <button type="button" class="editDeck" data-id="{{ deck.id }}">Edit</button>
                         </div>
                     </div>
                     {% endfor %}

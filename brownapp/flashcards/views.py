@@ -39,12 +39,14 @@ def delete_deck(response, deck_id, id=None):
     deck.delete()
     return redirect("/")
 
-def edit_deck(response, deck_id, id):
+def edit_deck(response, deck_id, id=None):
     if response.method == "POST":
         deck = Deck.objects.get(id=deck_id)
         f_deck = deck_form(response.POST, instance=deck)
         if f_deck.is_valid():
             f_deck.save()
+        if id:
+            return redirect("/deck/" + str(id) + "/")
         return redirect("/")
         
 def create_card(response, deck_id):
