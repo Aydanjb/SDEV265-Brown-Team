@@ -42,12 +42,15 @@
                 <a href="/">Flashcards</a>
             </div>
             <div id="timer">
-                <h2>Pomodoro Timer</h2>
-                <p>0:00</p>
+                <h3 id="mode">Pomodoro</h3>
+                <div id="timer-display">
+                    <span id="min">25</span>
+                    <span class="seperator">:</span>
+                    <span id="sec">00</span>
+                </div>
                 <div id="timer-buttons">  
                     <button type="button" id="start">Start</button>
                     <button type="button" id="stop">Stop</button>
-                    <button type="button" id="reset">Reset</button>
                 </div>
             </div>
             <div id="decks">
@@ -76,7 +79,7 @@
     {% block scripts %}
         <script src="{% static 'flashcards/scripts/script.js' %}"></script>
     {% endblock scripts %}
-    <!--<script src="{% static 'flashcards/scripts/pomodoro.js' %}"></script>-->
+    <script src="{% static 'flashcards/scripts/pomodoro.js' %}"></script>
 </body>
 
 </html>
