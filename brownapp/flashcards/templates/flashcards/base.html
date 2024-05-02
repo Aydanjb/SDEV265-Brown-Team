@@ -12,74 +12,10 @@
 </head>
     
 <body>
-    {% block cardSlides %}
-    {% endblock cardSlides %}
-    <div id="deckModal" class="modal">
-        <div class="modal-content">
-            <form action="create_deck/" method="post">
-                {% csrf_token %}
-                {{ f_deck.as_p }}
-                <button type="submit" id="saveDeck" class="saveBtn">Save</button>
-            </form>
-        </div>
-    </div>
-    <div id="editDeckModal" class="modal">
-        <div class="modal-content">
-            <form action="edit_deck/{{ deck.id }}" method="post" id="editDeckForm">
-                {% csrf_token %}
-                {{ f_deck.as_p }}
-                <button type="submit" id="saveEditDeck" class="saveBtn">Save</button>
-            </form>
-        </div>
-    </div>
-    {% block cardModal %}
-    {% endblock cardModal %}
-    {% block editModal %}
-    {% endblock editModal %}
-    <div id="content">
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <a href="/">Flashcards</a>
-            </div>
-            <div id="timer">
-                <h3 id="mode">Pomodoro</h3>
-                <div id="timer-display">
-                    <span id="min">25</span>
-                    <span class="seperator">:</span>
-                    <span id="sec">00</span>
-                </div>
-                <div id="timer-buttons">  
-                    <button type="button" id="start">Start</button>
-                    <button type="button" id="stop">Stop</button>
-                </div>
-            </div>
-            <div id="decks">
-                <h2>Decks</h3>
-                    {% for deck in decks %}
-                    <div class="deck-container">
-                        <a href="/deck/{{ deck.id }}" class="button deck">{{ deck.name }}</a>
-                        <div class="deck-buttons">
-                            <a href="delete_deck/{{ deck.id }}" class="deleteDeck">X</a>
-                            <button type="button" class="editDeck" data-id="{{ deck.id }}">Edit</button>
-                        </div>
-                    </div>
-                    {% endfor %}
-                <button type="button" id="createDeck">Create New Deck</button>
-            </div>
-            <div class="sidebar-footer">
-                <button type="button" id="account">My account</button>
-            </div>
-        </nav>
         <main>
             {% block content %}
             {% endblock content %}
         </main>
-    </div>
-
-    {% block scripts %}
-        <script src="{% static 'flashcards/scripts/script.js' %}"></script>
-    {% endblock scripts %}
-    <script src="{% static 'flashcards/scripts/pomodoro.js' %}"></script>
 </body>
 
 </html>
