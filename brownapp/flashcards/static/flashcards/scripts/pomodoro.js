@@ -1,53 +1,100 @@
 // Get references to the timer elements
-const timerDisplay = document.querySelector('#timer p');
-const startButton = document.querySelector('#start');
-const stopButton = document.querySelector('#stop');
-const resetButton = document.querySelector('#reset');
+const timerDisplay = document.getElementById('timer');
+const timerMode = document.getElementById('mode');
+const startButton = document.getElementById('start');
+const stopButton = document.getElementById('stop');
 
-// Set initial timer value (in seconds)
-const pomodoroDuration = 25 * 60; // 25 minutes
+const timer = {
+    pomodoro: 25,
+    shortBreak: 5,
+    longBreak: 15,
+    longBreakInterval: 4,
+    sessions: 0,
+};
 
-// Initialize timer state
-let timer;
-let remainingTime = pomodoroDuration;
-let mode = 'pomodoro'; // Initial mode
+let interval;
 
-// Function to update the timer display
-function updateTimerDisplay() {
-    const minutes = Math.floor(remainingTime / 60);
-    const seconds = remainingTime % 60;
-    timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+function getRemainingTime(endTime) {
+    const currentTime = Date.parse(new Date());
+    const difference = endTime - currentTime;
+
+    const total = Number.parseInt(difference / 1000, 10);
+    const minutes = Number.parseInt((total / 60) % 60, 10)
+    const seconds = Number.parseInt(total % 60, 10);
+
+    return {
+        total,
+        minutes,
+        seconds
+    };
 }
 
-// Event listeners for buttons
-startButton.addEventListener('click', () => {
-    clearInterval(timer); // Clear any existing timers
-    timer = setInterval(() => {
-        if (remainingTime > 0) {
-            remainingTime--;
-            updateTimerDisplay();
-        } else {
-            // Switch to the next mode
-            if (mode === 'pomodoro') {
-                switchMode('shortBreak');
-            } else if (mode === 'shortBreak') {
-                switchMode('pomodoro');
+function startTimer() {
+    let { total } = timer.remainingTime;
+    const endTime = Date.parse(new Date()) + total * 1000;
+
+    if (timer.mode === "pomodoro") timer.sessions++;
+
+    interval = setInterval(() => {
+        timer.remainingTime = getRemainingTime(endTime);
+        updateClock();
+
+        total = timer.remainingTime.total;
+        if (total <= 0) {
+            clearInterval(interval);
+
+            switch (timer.mode) {
+                case 'pomodoro':
+                    if (timer.sessions % timer.longBreakInterval === 0) {
+                        switchMode('longBreak')
+                    }
+                    else {
+                        switchMode('shortBreak');
+                    }
+                    break;
+                default:
+                    switchMode('pomodoro');
             }
+
+            startTimer();
         }
     }, 1000);
-});
+}
 
-stopButton.addEventListener('click', () => {
-    clearInterval(timer);
-    updateTimerDisplay();
-});
+function stopTimer() {
+    clearInterval(interval);
+}
 
-resetButton.addEventListener('click', () => {
-    clearInterval(timer);
-    switchMode('pomodoro');
-    updateTimerDisplay();
-});
+function updateClock() {
+    const { remainingTime } = timer;
+    const minutes = `${remainingTime.minutes}`.padStart(2, '0');
+    const seconds = `${remainingTime.seconds}`.padStart(2, '0');
 
-// Initial setup
-updateTimerDisplay();
+    const min = document.getElementById('min');   
+    const sec = document.getElementById('sec');
+    min.textContent = minutes;
+    sec.textContent = seconds;
+}
+
+function switchMode(mode) {
+    timer.mode = mode;
+    timer.remainingTime = {
+        total: timer[mode] * 60,
+        minutes: timer[mode],
+        seconds: 0,
+    };
+
+    if (mode === 'shortBreak') {
+        timerMode.textContent = 'Short Break';
+    }
+    else if (mode === 'longBreak') {
+        timerMode.textContent = 'Long Break';
+    }
+    else timerMode.textContent = mode.charAt(0).toUpperCase() + mode.slice(1);
+
+    updateClock();
+}
+
 switchMode('pomodoro');
+startButton.addEventListener('click', startTimer);
+stopButton.addEventListener('click', stopTimer);

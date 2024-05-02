@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block cardSlides %}
+    <div id="cardSlides">
+        <div id="card-container">
+            <span id="left-arrow">
+                <i class="fa-solid fa-arrow-left"></i>
+            </span>
+            <div id="cardSlide">
+            </div>
+            <span id="right-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
+        </div>
+        <div id="cardButtons">
+            <a href="" class="deleteCard">X</a>
+            <button type="button" class="editCard">Edit</button>
+        </div>
+    </div>
+{% endblock cardSlides %}
+{% block editModal %}
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <form action="" method="post" id="editForm"> 
+                {% csrf_token %}
+                {{ f_card.as_p }}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="submit" id="editFormBtn" class="saveBtn">Save</button>
+            </form>
+        </div>
+    </div>
+{% endblock editModal %}
+{% block cardModal %}
+    <div id="cardModal" class="modal">
+        <div class="modal-content">
+            <form action="../../create_card/{{ deck.id }}/" method="post">
+                {% csrf_token %}
+                {{ f_card.as_p }}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="submit" id="saveCard" class="saveBtn">Save</button>
+            </form>
+        </div>
+    </div>
+{% endblock cardModal %}
+{% block content %}
+    <div class="addCard">
+        Add Card
+    </div>
+    {% for card in cards %}
+        <div class="card" data-id="{{ card.id }}">
+            <!--
+            -->
+             <div class="front">
+                 <p>{{ card.front }}</p>
+             </div>
+             <div class="back">
+                <p>{{ card.back }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content%}
+
+{% block scripts %}
+    <script src="{% static 'flashcards/scripts/deck.js' %}"></script>
+{% endblock scripts %}
