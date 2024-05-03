@@ -64,7 +64,7 @@ def edit_deck(response, deck_id, id=None):
             f_deck.save()
         if id:
             return redirect("/flashcards/deck/" + str(id) + "/")
-        return redirect("/")
+        return redirect(flashcards)
 
 @login_required        
 def create_card(response, deck_id):
