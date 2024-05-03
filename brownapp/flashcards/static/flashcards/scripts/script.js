@@ -1,6 +1,6 @@
 const createDeckBtn = document.getElementById('createDeck');
 const saveDeck = document.getElementById('saveDeck');
-const editDeckBtn = document.querySelector('.editDeck');
+const editDeckBtn = document.querySelectorAll('.editDeck');
 const editDeckModal = document.getElementById('editDeckModal');
 const saveEditDeck = document.getElementById('saveEditDeck');
 const deckModal = document.getElementById('deckModal');
@@ -24,13 +24,14 @@ function closeDeckModal() {
 
 createDeckBtn.addEventListener('click', openDeckModal);
 saveDeck.addEventListener('click', closeDeckModal);
-editDeckBtn.addEventListener('click', openEditDeck);
-saveEditDeck.addEventListener('click', closeEditDeck);
-
-editDeckBtn.addEventListener('click', (e) => {
-    const id = e.target.getAttribute('data-id');
-    editDeckForm.action = `edit_deck/${id}`;
+editDeckBtn.forEach(element => {
+    element.addEventListener('click', openEditDeck);
+    element.addEventListener('click', (e) => {
+        const id = e.target.getAttribute('data-id');
+        editDeckForm.action = `edit_deck/${id}`;
+    });
 });
+saveEditDeck.addEventListener('click', closeEditDeck);
 
 editDeckModal.addEventListener('click', (e) => {
     if (e.target === editDeckModal) {

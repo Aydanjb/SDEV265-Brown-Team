@@ -8,7 +8,7 @@ const nextSlide = document.getElementById('right-arrow');
 const prevSlide = document.getElementById('left-arrow');
 const editModal = document.getElementById('editModal');
 const editCardBtn = document.querySelector('.editCard');
-const editDeckBtn = document.querySelector('.editDeck');
+const editDeckBtn = document.querySelectorAll('.editDeck');
 const editDeckModal = document.getElementById('editDeckModal');
 const saveEditDeck = document.getElementById('saveEditDeck');
 const deckModal = document.getElementById('deckModal');
@@ -143,7 +143,13 @@ editCardBtn.addEventListener('click', openEditModal);
 addCardBtn.addEventListener('click', openCardModal);
 createDeckBtn.addEventListener('click', openDeckModal);
 saveDeck.addEventListener('click', closeDeckModal);
-editDeckBtn.addEventListener('click', openEditDeck);
+editDeckBtn.forEach(element => {
+    element.addEventListener('click', openEditDeck);
+    element.addEventListener('click', (e) => {
+        const id = e.target.getAttribute('data-id');
+        editDeckForm.action = `edit_deck/${id}`;
+    });
+});
 
 editDeckModal.addEventListener('click', (e) => {
     if (e.target === editDeckModal) {
