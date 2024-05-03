@@ -1,4 +1,4 @@
-# CSCI202-Brown-Team
+# SDEV265-Brown-Team
 
 ## About The Project
 
@@ -28,7 +28,7 @@ Windows
     ```
 3. Change directories
     ```
-    cd .\CSCI202-Brown-Team\
+    cd .\SDEV265-Brown-Team\
     ```
 4. Install project dependencies
    ```
