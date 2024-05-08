@@ -1,3 +1,4 @@
+// DOM Element Variables
 const createDeckBtn = document.getElementById('createDeck');
 const addCardBtn = document.querySelector('.addCard');
 const saveDeck = document.getElementById('saveDeck');
@@ -14,6 +15,7 @@ const saveEditDeck = document.getElementById('saveEditDeck');
 const deckModal = document.getElementById('deckModal');
 
 
+// Opens or hides the various modals 
 function openCardModal() {   
     cardModal.style.display = 'block';
 }
@@ -54,18 +56,21 @@ function closeEditDeck() {
     editDeckModal.style.display = 'none';
 }
 
+// Adds the flipping effect to the card
 function addFlipping() {
     cardSlide.addEventListener('click', () => {
         cardSlide.classList.toggle('flipped');
     });
 }
 
+// Sets the form action to the edit card url
 function setFormAction() {
     const cardId = cardSlide.getAttribute('data-id');
     const form = document.getElementById('editForm');
     form.action = `./edit_card/${cardId}/`;
 }
 
+// Gets the card data from the card element
 function getCardDataByElement(element) {
     const front = element.querySelector('.front').textContent;
     const back = element.querySelector('.back').textContent;
@@ -75,6 +80,7 @@ function getCardDataByElement(element) {
     return cardData;
 }
 
+// Gets the card data from the card id
 function getCardDataById(id) {
     const card = document.querySelector(`.card[data-id="${id}"]`);
     const front = card.querySelector('.front').textContent;
@@ -85,6 +91,7 @@ function getCardDataById(id) {
     return cardData;
 }
 
+// Populates the card slide with the card data
 function populateCardSlide(cardData) {
     const front = cardData[0];
     const back = cardData[1];
@@ -104,30 +111,54 @@ function populateCardSlide(cardData) {
     deleteCardBtn.href = `./delete_card/${cardId}/`;
 }
 
+// Adds event listeners to the card slide arrows
 prevSlide.addEventListener('click', () => {
+    // Creates an array of all card ids
     const cardIds = Array.from(document.querySelectorAll('.card')).map(card => card.getAttribute('data-id'));
+
+    // Gets the current card index
     let currentCardIndex = parseInt(cardSlide.getAttribute('data-index'));
+
+    // If the current card is the first card, set the current card to the last card
     if (currentCardIndex === 0) {
         currentCardIndex = cardIds.length - 1;
     }
+    // Otherwise, decrement the current card index
     else currentCardIndex--;
+
+    // Get the card id of the current card
     let cardId = cardIds[currentCardIndex];
+
+    // Populate the card slide with the current card data
     populateCardSlide(getCardDataById(cardId));
 });
 
 nextSlide.addEventListener('click', () => {
+    // Creates an array of all card ids
     const cardIds = Array.from(document.querySelectorAll('.card')).map(card => card.getAttribute('data-id'));
+
+    // Gets the current card index
     let currentCardIndex = parseInt(cardSlide.getAttribute('data-index'));
+
+    // If the current card is the last card, set the current card to the first card
     if (currentCardIndex === cardIds.length - 1) {
         currentCardIndex = 0;
     }
+    // Otherwise, increment the current card index
     else currentCardIndex++;
+    
+    // Get the card id of the current card
     let cardId = cardIds[currentCardIndex];
+
+    // Populate the card slide with the current card data
     populateCardSlide(getCardDataById(cardId));
+
+    // Sets the href of the delete card button
     const deleteCardBtn = document.querySelector('.deleteCard');
     deleteCardBtn.href = `../../delete_card/${cardId}/`;
 });
 
+// Adds an index to each card and adds event listeners to each card to open the card slideshow
 let cards = document.querySelectorAll('.card');
 let i = 0;
 cards.forEach(card => {
@@ -138,11 +169,12 @@ cards.forEach(card => {
     });
 }); 
 
+// Adds event listeners to the add, edit, and save card/deck buttons
 editCardBtn.addEventListener('click', setFormAction);
 editCardBtn.addEventListener('click', openEditModal);
 addCardBtn.addEventListener('click', openCardModal);
-createDeckBtn.addEventListener('click', openDeckModal);
 saveDeck.addEventListener('click', closeDeckModal);
+createDeckBtn.addEventListener('click', openDeckModal);
 editDeckBtn.forEach(element => {
     element.addEventListener('click', openEditDeck);
     element.addEventListener('click', (e) => {
@@ -151,6 +183,7 @@ editDeckBtn.forEach(element => {
     });
 });
 
+// Adds event listeners to hide the various modals
 editDeckModal.addEventListener('click', (e) => {
     if (e.target === editDeckModal) {
         closeEditDeck();
@@ -181,4 +214,5 @@ cardModal.addEventListener('click', (e) => {
     }
 });
 
+// Adds the flipping effect to the card
 addFlipping();
