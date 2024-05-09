@@ -35,8 +35,12 @@ Windows
    python -m pip install --upgrade pip
    python -m pip install -r .\requirements.txt
    ```
-5. Run development server
+5. Change directories again
+   ```
+   cd .\brownapp\
+   ```
+6. Run development server
    ```
    python manage.py runserver
    ```
-6. Go to 127.0.0.1:8000 in your browser
+7. Go to 127.0.0.1:8000 in your browser
