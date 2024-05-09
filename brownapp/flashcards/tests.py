@@ -45,36 +45,30 @@ class CardTestCase(TestCase):
 
 class ViewTest(TestCase):
     def setUp(self):
-        self.client = Client()
-        user = User.objects.create(username="testuser")
-        user.set_password("testpassword")
-        user.save()
-
-        self.logged_in = self.client.login(username="testuser", password="testpassword")
+        user = User.objects.create_user(username="testuser", password="testpassword")
+        self.client.login(username="testuser", password="testpassword")
         
-
-    def login_test(self):
-        self.assertTrue(self.logged_in)
-
-    # BROKEN CODE
-    '''
     def test_home(self):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
         
     def test_deck(self):
-        deck = Deck.objects.create(name="Test Deck", user = User.objects.get(username="testuser"))
-        response = self.client.get(f"/deck/{deck.id}/")
+        user = User.objects.get(username="testuser")
+        self.client.login(username="testuser", password="testpassword")
+        deck = Deck.objects.create(user=user, name="Test Deck")
+        response = self.client.get(f"/flashcards/deck/{deck.id}/")
         self.assertEqual(response.status_code, 200)
         
     def test_create_deck(self):
-        response = self.client.post("/create_deck/", {"name": "Test", "user": 1})
+        user = User.objects.get(username="testuser")
+        self.client.login(username="testuser", password="testpassword")
+        response = self.client.post("/flashcards/create_deck/", {"name": "Test", "user": 1})
         self.assertEqual(response.status_code, 302)
         
     def test_create_card(self):
-        self.client.login(username=self.test_username, password=self.test_password)
-        deck = Deck.objects.create(name="Test", user=self.test_user)
-        response = self.client.post(f"/create_card/{deck.id}/", {"front": "Test Front", "back": "Test Back"})
+        user = User.objects.get(username="testuser")
+        self.client.login(username="testuser", password="testpassword")
+        deck = Deck.objects.create(name="Test", user=user)
+        response = self.client.post(f"/flashcards/create_card/{deck.id}/", {"front": "Test Front", "back": "Test Back"})
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Card.objects.filter(front="Test Front", back="Test Back").exists())
-'''
